@@ -1,38 +1,450 @@
-.App {
-  text-align: center;
+:root {
+  --pink-1: #ff8fab;
+  --pink-2: #ffb3c6;
+  --pink-3: #ffd8e2;
+  --bg-light: #fff0f5;
+  --text-main: #742347;
+  --text-soft: #a33b68;
+  --btn-yes: #e6397f;
+  --btn-no: #ffcadb;
 }
 
-.App-logo {
-  height: 40vmin;
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  background: var(--bg-light);
+}
+
+.app {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 20% 20%, #ffe4ee 0%, transparent 35%),
+    radial-gradient(circle at 80% 10%, #ffd5e5 0%, transparent 40%),
+    linear-gradient(165deg, #fff6fa 0%, #ffe8f1 55%, #ffe0ec 100%);
+}
+
+.bg-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 70%, rgba(255, 143, 171, 0.3), transparent 48%);
+  animation: glowPulse 4s ease-in-out infinite;
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.card {
+  width: min(95vw, 520px);
+  min-height: 450px;
+  position: relative;
+  z-index: 2;
+  border: 2px solid #ffd3e3;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(4px);
+  padding: 28px 20px 24px;
+  box-shadow: 0 15px 45px rgba(230, 57, 127, 0.2);
+  overflow: hidden;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+h1 {
+  margin: 0 0 10px;
+  text-align: center;
+  font-size: clamp(1.7rem, 3.8vw, 2.2rem);
+  letter-spacing: 0.8px;
+  color: var(--text-main);
+}
+
+.flower-field {
+  position: absolute;
+  inset: auto 0 0;
+  height: 60%;
+  pointer-events: none;
+  filter: drop-shadow(0 0 10px rgba(255, 80, 130, 0.28));
+}
+
+.flower {
+  position: absolute;
+  bottom: -140px;
+  width: clamp(44px, 6vw, 72px);
+  height: clamp(200px, 24vw, 250px);
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: flex-end;
+  transform-origin: bottom center;
+  animation-name: flowerGrow;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
 }
 
-.App-link {
-  color: #61dafb;
+.stem {
+  width: clamp(5px, 0.7vw, 8px);
+  height: var(--stem-height, 130px);
+  border-radius: 999px;
+  background: linear-gradient(180deg, #8fe080 0%, #2d8f3e 65%, #237034 100%);
+  transform-origin: bottom center;
+  animation-name: stemGrow;
+  animation-duration: inherit;
+  animation-delay: inherit;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.leaf {
+  position: absolute;
+  bottom: 58px;
+  width: clamp(20px, 3vw, 30px);
+  height: clamp(10px, 1.8vw, 16px);
+  border-radius: 100% 0 100% 0;
+  background: linear-gradient(120deg, #64bf62 0%, #3c9e4c 70%);
+  --leaf-angle: -34deg;
+  --leaf-flip: 1;
+  opacity: 0;
+  animation-name: leafReveal;
+  animation-duration: inherit;
+  animation-delay: inherit;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+}
+
+.leaf-left {
+  left: 7px;
+}
+
+.leaf-right {
+  right: 7px;
+  --leaf-flip: -1;
+}
+
+.blossom {
+  position: absolute;
+  top: 22px;
+  left: 50%;
+  width: clamp(34px, 5vw, 52px);
+  height: clamp(34px, 5vw, 52px);
+  transform: translateX(-50%) scale(0.08) rotate(-8deg);
+  opacity: 0;
+  animation-name: blossomOpen;
+  animation-duration: inherit;
+  animation-delay: inherit;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+}
+
+.tulip .blossom {
+  width: clamp(34px, 5vw, 50px);
+  height: clamp(38px, 5.3vw, 56px);
+}
+
+.t-petal {
+  position: absolute;
+  background: linear-gradient(180deg, #ff6e93 0%, #dd2d67 82%);
+  box-shadow: inset 0 -3px 0 rgba(155, 20, 57, 0.2);
+}
+
+.t-center {
+  width: 52%;
+  height: 74%;
+  left: 24%;
+  top: 6%;
+  border-radius: 60% 60% 42% 42%;
+  z-index: 2;
+}
+
+.t-left {
+  width: 44%;
+  height: 66%;
+  left: 4%;
+  top: 14%;
+  border-radius: 58% 70% 40% 48%;
+  transform: rotate(-20deg);
+}
+
+.t-right {
+  width: 44%;
+  height: 66%;
+  right: 4%;
+  top: 14%;
+  border-radius: 70% 58% 48% 40%;
+  transform: rotate(20deg);
+}
+
+.rose .blossom {
+  width: clamp(32px, 4.8vw, 48px);
+  height: clamp(32px, 4.8vw, 48px);
+}
+
+.r-layer {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ff8aa7 0%, #e53b71 72%);
+  box-shadow: inset 0 -3px 0 rgba(150, 15, 50, 0.16);
+}
+
+.r-outer {
+  width: 100%;
+  height: 100%;
+}
+
+.r-mid {
+  width: 72%;
+  height: 72%;
+  left: 14%;
+  top: 14%;
+}
+
+.r-inner {
+  width: 46%;
+  height: 46%;
+  left: 27%;
+  top: 27%;
+}
+
+.r-core {
+  position: absolute;
+  top: 43%;
+  left: 43%;
+  width: 14%;
+  height: 14%;
+  border-radius: 50%;
+  background: #ffd966;
+  box-shadow: 0 0 8px rgba(255, 217, 102, 0.5);
+}
+
+.content {
+  position: relative;
+  z-index: 3;
+  margin-top: 140px;
+  text-align: center;
+  color: var(--text-main);
+}
+
+.content p {
+  margin: 0;
+  line-height: 1.6;
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  color: var(--text-soft);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.btn {
+  border: 0;
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-size: 0.98rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-next {
+  margin-top: 18px;
+  background: linear-gradient(160deg, var(--pink-1), #ff6f98);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(230, 57, 127, 0.35);
+}
+
+.actions {
+  position: relative;
+  margin-top: 18px;
+  min-height: 72px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  align-items: center;
+}
+
+.btn-yes {
+  background: linear-gradient(160deg, var(--btn-yes), #cf1f67);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(214, 51, 132, 0.32);
+  z-index: 2;
+}
+
+.btn-no {
+  background: var(--btn-no);
+  color: #6d2346;
+  border: 1px solid #f8aac6;
+  position: relative;
+  transition: transform 0.15s ease-out;
+}
+
+.accepted-copy p + p {
+  margin-top: 10px;
+}
+
+.heart-fireworks {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  overflow: hidden;
+}
+
+.heart {
+  position: absolute;
+  bottom: -20px;
+  width: var(--heart-size, 14px);
+  height: var(--heart-size, 14px);
+  background: #ff3d7b;
+  transform: rotate(45deg);
+  box-shadow: 0 0 14px rgba(255, 61, 123, 0.55);
+  animation: heartBurst linear infinite;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: var(--heart-size, 14px);
+  height: var(--heart-size, 14px);
+  border-radius: 50%;
+  background: #ff3d7b;
+}
+
+.heart::before {
+  left: calc(var(--heart-size, 14px) * -0.5);
+}
+
+.heart::after {
+  top: calc(var(--heart-size, 14px) * -0.5);
+}
+
+@keyframes flowerGrow {
+  0% {
+    transform: translateY(58px) scale(calc(var(--flower-scale, 1) * 0.92));
+    opacity: 0;
   }
-  to {
-    transform: rotate(360deg);
+  12% {
+    opacity: 1;
+  }
+  65% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-12px) scale(var(--flower-scale, 1));
+    opacity: 0;
+  }
+}
+
+@keyframes stemGrow {
+  0% {
+    transform: scaleY(0.06);
+  }
+  45% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes blossomOpen {
+  0%,
+  36% {
+    transform: translateX(-50%) scale(0.08) rotate(-16deg);
+    opacity: 0;
+  }
+  55% {
+    transform: translateX(-50%) scale(1.05) rotate(8deg);
+    opacity: 1;
+  }
+  72% {
+    transform: translateX(-50%) scale(0.98) rotate(-3deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-50%) scale(0.94) rotate(0deg);
+    opacity: 0.7;
+  }
+}
+
+@keyframes leafReveal {
+  0%,
+  36% {
+    opacity: 0;
+    transform: scaleX(var(--leaf-flip, 1)) scale(0.2) rotate(var(--leaf-angle, -34deg));
+  }
+  52%,
+  100% {
+    opacity: 1;
+    transform: scaleX(var(--leaf-flip, 1)) scale(1) rotate(var(--leaf-angle, -34deg));
+  }
+}
+
+@keyframes heartBurst {
+  0% {
+    transform: translateY(0) scale(0.4) rotate(0deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-105vh) scale(1.2) rotate(18deg);
+    opacity: 0;
+  }
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (min-width: 768px) {
+  .app {
+    padding: 28px;
+  }
+
+  .card {
+    width: min(78vw, 700px);
+    min-height: 500px;
+    padding: 36px 32px;
+  }
+
+  .content {
+    margin-top: 156px;
+  }
+
+  .btn {
+    font-size: 1.02rem;
+    padding: 11px 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .card {
+    width: min(72vw, 860px);
+    min-height: 540px;
+    padding: 44px 46px;
+  }
+
+  h1 {
+    font-size: clamp(2.1rem, 2.6vw, 2.8rem);
+  }
+
+  .content p {
+    font-size: clamp(1.1rem, 1.6vw, 1.35rem);
   }
 }
