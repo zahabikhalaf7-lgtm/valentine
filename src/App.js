@@ -2,10 +2,10 @@ import { useMemo, useRef, useState } from "react";
 import "./App.css";
 
 const OPENING_LINES = [
-  "Hai kamu, ada kejutan kecil di sini...",
-  "Bunga-bunganya mekar khusus untuk kamu.",
-  "Makasih udah hadir dan bikin hari-hari jadi manis.",
-  "Jadi... mau rayain Valentine bareng aku?",
+  "Hai sayang, aku mau bilang sesuatu nih.",
+  "Sebelumnnya, terimakasih banyak ya udah mau hadir di hidup aku. udah mau membuat hari-hari aku lebih berwarna. jujur aja aku merasa beruntung banget bisa jadi pacar kamu hari ini dan seterusnya. makasih juga kamu sudah sangat sabar dan sangat sayang ke aku, nerima semua kekurangan aku, dan selalu mau jadi tempat aku berpulang.",
+  "Oh iya, hari ini hari valentine kan ya? hari dimana para wanita mendapatkan banyak perhatian dan hadiah dari pasangan mereka. aku juga pengen banget ngasih kamu perhatian dan hadiah yang spesial di hari ini. tapi aku masih bingung nih, kira-kira kamu mau gak ya, kalo ngerayain valentine bareng aku? cowok kamu yang palaing ganteng ini, hehehe.",
+  "Kalo kamu mau tolong pencet mau ya cantik ku 😘",
 ];
 
 function App() {
@@ -164,7 +164,7 @@ function App() {
                   className="btn btn-yes"
                   onClick={() => setAccepted(true)}
                 >
-                  Setuju
+                  Mau banget sayang 😘
                 </button>
                 <button
                   ref={noBtnRef}
@@ -172,23 +172,26 @@ function App() {
                   style={noStyle}
                   onClick={runAwayNoButton}
                 >
-                  Tidak
+                  Dih najis 🤮
                 </button>
               </div>
             )}
           </div>
         ) : !started ? (
           <div className="content start-content">
-            <p>Tekan tombol di bawah ini, lalu kejutannya mulai.</p>
+            <p>Tekan tombol di bawah ini ya cantik ku 😘</p>
             <button className="btn btn-start" onClick={startExperience}>
-              Mulai Coba
+              Mulai
             </button>
           </div>
         ) : (
           <div className="content accepted-copy">
-            <p>Yay! Makasih udah bilang setuju.</p>
-            <p>Semoga Valentine kita penuh tawa, cerita, dan momen manis.</p>
-            <p>Love fireworks untuk kamu!</p>
+            <p>Yay! Makasih sayangnya aku, udah mau ngerayain valentine bareng aku. 😘</p>
+            <p>Semoga Valentine kita kali ini lebih manis dan berkesan dari tahun-tahun sebelumnya ya 😍
+            Aku janji bakal berusaha jadi pacar yang lebih baik lagi buat kamu untuk setiap harinya.
+            jadi tolong jangan bosan-bosan menerima aku sebagai pacar kamu ya sayang. ❤️
+            </p>
+            <p>Love banyak-banyak untuk kamu ya sayang ku! 😘💕</p>
           </div>
         )}
       </section>
