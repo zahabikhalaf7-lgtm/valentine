@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import "./App.css";
 
 const OPENING_LINES = [
@@ -9,8 +9,13 @@ const OPENING_LINES = [
 ];
 
 function App() {
+  const audioRef = useRef(null);
+  const yesBtnRef = useRef(null);
+  const noBtnRef = useRef(null);
+  const [started, setStarted] = useState(false);
   const [lineIndex, setLineIndex] = useState(0);
   const [noStyle, setNoStyle] = useState({});
+  const [noEscapeCount, setNoEscapeCount] = useState(0);
   const [accepted, setAccepted] = useState(false);
 
   const flowers = useMemo(
@@ -48,14 +53,55 @@ function App() {
     }
   };
 
+  const moveNoButtonBehindYes = () => {
+    const yesEl = yesBtnRef.current;
+    const noEl = noBtnRef.current;
+    if (!yesEl || !noEl) {
+      return;
+    }
+
+    const targetX = yesEl.offsetLeft - noEl.offsetLeft;
+    const targetY = yesEl.offsetTop - noEl.offsetTop;
+
+    setNoStyle({
+      transform: `translate(${targetX}px, ${targetY}px)`,
+      zIndex: 1,
+      pointerEvents: "none",
+      opacity: 1,
+    });
+  };
+
   const runAwayNoButton = () => {
+    const nextCount = noEscapeCount + 1;
+    setNoEscapeCount(nextCount);
+
+    if (nextCount >= 4) {
+      moveNoButtonBehindYes();
+      return;
+    }
+
     const nextX = Math.floor(Math.random() * 230) - 115;
     const nextY = Math.floor(Math.random() * 180) - 90;
     setNoStyle({
       transform: `translate(${nextX}px, ${nextY}px) rotate(${Math.floor(
         Math.random() * 16 - 8
       )}deg)`,
+      zIndex: 3,
+      opacity: 1,
     });
+  };
+
+  const startExperience = async () => {
+    setStarted(true);
+    const track = audioRef.current;
+    if (!track) {
+      return;
+    }
+    try {
+      await track.play();
+    } catch {
+      // Play can fail if browser blocks media or file is missing.
+    }
   };
 
   return (
@@ -63,6 +109,7 @@ function App() {
       <div className="bg-glow" />
       <section className="card">
         <h1>Happy Valentine</h1>
+        <audio ref={audioRef} src="/valentine.mp3" loop preload="auto" />
 
         <div className="flower-field" aria-hidden="true">
           {flowers.map((flower) => (
@@ -100,7 +147,7 @@ function App() {
           ))}
         </div>
 
-        {!accepted ? (
+        {!accepted && started ? (
           <div className="content">
             <p>{currentLine}</p>
 
@@ -112,20 +159,30 @@ function App() {
 
             {isLastLine && (
               <div className="actions">
-                <button className="btn btn-yes" onClick={() => setAccepted(true)}>
+                <button
+                  ref={yesBtnRef}
+                  className="btn btn-yes"
+                  onClick={() => setAccepted(true)}
+                >
                   Setuju
                 </button>
                 <button
+                  ref={noBtnRef}
                   className="btn btn-no"
                   style={noStyle}
-                  onMouseEnter={runAwayNoButton}
                   onClick={runAwayNoButton}
-                  onTouchStart={runAwayNoButton}
                 >
                   Tidak
                 </button>
               </div>
             )}
+          </div>
+        ) : !started ? (
+          <div className="content start-content">
+            <p>Tekan tombol di bawah ini, lalu kejutannya mulai.</p>
+            <button className="btn btn-start" onClick={startExperience}>
+              Mulai Coba
+            </button>
           </div>
         ) : (
           <div className="content accepted-copy">
