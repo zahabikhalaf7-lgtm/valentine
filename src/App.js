@@ -8,7 +8,6 @@ const OPENING_LINES = [
   "Kalo kamu mau tolong pencet mau ya cantik ku 😘",
 ];
 
-const WHATSAPP_NUMBER = "+6285746696663";
 const WHATSAPP_MESSAGE = "Iya sayang aku mau banget!";
 
 function App() {
