@@ -42,16 +42,33 @@ body {
 
 .card {
   width: min(95vw, 520px);
-  min-height: min(80vh, 520px);
+  min-height: clamp(420px, 62vh, 560px);
+  --card-bottom-space: 145px;
   position: relative;
   z-index: 2;
   border: 2px solid #ffd3e3;
   border-radius: 30px;
   background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(4px);
-  padding: 28px 20px 24px;
+  padding: 28px 20px var(--card-bottom-space);
   box-shadow: 0 15px 45px rgba(230, 57, 127, 0.2);
   overflow: hidden;
+}
+
+.card.scene-start {
+  --card-bottom-space: 120px;
+}
+
+.card.scene-story {
+  --card-bottom-space: 138px;
+}
+
+.card.scene-choice {
+  --card-bottom-space: 128px;
+}
+
+.card.scene-accepted {
+  --card-bottom-space: 118px;
 }
 
 h1 {
@@ -271,6 +288,7 @@ h1 {
   display: grid;
   justify-items: center;
   gap: 6px;
+  margin-top: clamp(16px, 3vh, 34px);
 }
 
 .audio-note {
@@ -445,8 +463,25 @@ h1 {
 
   .card {
     width: min(78vw, 700px);
-    min-height: 500px;
-    padding: 36px 32px;
+    min-height: clamp(480px, 62vh, 620px);
+    --card-bottom-space: 165px;
+    padding: 36px 32px var(--card-bottom-space);
+  }
+
+  .card.scene-start {
+    --card-bottom-space: 136px;
+  }
+
+  .card.scene-story {
+    --card-bottom-space: 156px;
+  }
+
+  .card.scene-choice {
+    --card-bottom-space: 146px;
+  }
+
+  .card.scene-accepted {
+    --card-bottom-space: 132px;
   }
 
   .content {
@@ -462,8 +497,25 @@ h1 {
 @media (min-width: 1024px) {
   .card {
     width: min(72vw, 860px);
-    min-height: 540px;
-    padding: 44px 46px;
+    min-height: clamp(520px, 64vh, 700px);
+    --card-bottom-space: 186px;
+    padding: 44px 46px var(--card-bottom-space);
+  }
+
+  .card.scene-start {
+    --card-bottom-space: 154px;
+  }
+
+  .card.scene-story {
+    --card-bottom-space: 176px;
+  }
+
+  .card.scene-choice {
+    --card-bottom-space: 164px;
+  }
+
+  .card.scene-accepted {
+    --card-bottom-space: 148px;
   }
 
   h1 {
@@ -483,8 +535,25 @@ h1 {
   .card {
     width: 100%;
     border-radius: 24px;
-    min-height: min(76vh, 560px);
-    padding: 22px 16px 20px;
+    min-height: clamp(430px, 68vh, 620px);
+    --card-bottom-space: 140px;
+    padding: 22px 16px var(--card-bottom-space);
+  }
+
+  .card.scene-start {
+    --card-bottom-space: 118px;
+  }
+
+  .card.scene-story {
+    --card-bottom-space: 134px;
+  }
+
+  .card.scene-choice {
+    --card-bottom-space: 126px;
+  }
+
+  .card.scene-accepted {
+    --card-bottom-space: 114px;
   }
 
   .flower-field {

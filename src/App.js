@@ -4,7 +4,7 @@ import "./App.css";
 const OPENING_LINES = [
   "Hai sayang, aku mau bilang sesuatu nih.",
   "Sebelumnnya, terimakasih banyak ya udah mau hadir di hidup aku. udah mau membuat hari-hari aku lebih berwarna. jujur aja aku merasa beruntung banget bisa jadi pacar kamu hari ini dan seterusnya. makasih juga kamu sudah sangat sabar dan sangat sayang ke aku, nerima semua kekurangan aku, dan selalu mau jadi tempat aku berpulang.",
-  "Oh iya, hari ini hari valentine kan ya? hari dimana para wanita mendapatkan banyak perhatian dan hadiah dari pasangan mereka. aku juga pengen banget ngasih kamu perhatian dan hadiah yang spesial di hari ini. tapi aku masih bingung nih, kira-kira kamu mau gak ya, kalo ngerayain valentine bareng aku? cowok kamu yang palaing ganteng ini, hehehe.",
+  "Oh iya, hari ini hari valentine kan ya? hari dimana para wanita mendapatkan banyak perhatian dan hadiah dari pasangan mereka. aku juga pengen banget ngasih kamu perhatian dan hadiah yang spesial di hari ini. tapi aku masih bingung nih, kira-kira kamu mau gak ya, kalo ngerayain valentine bareng aku? cowok kamu yang paling ganteng ini, hehehe.",
   "Kalo kamu mau tolong pencet mau ya cantik ku 😘",
 ];
 
@@ -46,6 +46,13 @@ function App() {
 
   const currentLine = OPENING_LINES[lineIndex];
   const isLastLine = lineIndex === OPENING_LINES.length - 1;
+  const cardStateClass = !started
+    ? "scene-start"
+    : accepted
+    ? "scene-accepted"
+    : isLastLine
+    ? "scene-choice"
+    : "scene-story";
 
   const nextLine = () => {
     if (!isLastLine) {
@@ -107,7 +114,7 @@ function App() {
   return (
     <main className={`app ${accepted ? "celebrate" : ""}`}>
       <div className="bg-glow" />
-      <section className="card">
+      <section className={`card ${cardStateClass}`}>
         <h1>Happy Valentine</h1>
         <audio ref={audioRef} src="/valentine.mp3" loop preload="auto" />
 
