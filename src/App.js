@@ -116,7 +116,7 @@ function App() {
     }
   };
 
-  const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+  const whatsappLink = `https://wa.me/${+6285746696663}?text=${encodeURIComponent(
     WHATSAPP_MESSAGE
   )}`;
 
