@@ -1,12 +1,15 @@
-import { useMemo, useRef, useState } from "react";
+﻿import { useMemo, useRef, useState } from "react";
 import "./App.css";
 
 const OPENING_LINES = [
   "Hai sayang, aku mau bilang sesuatu nih.",
   "Sebelumnnya, terimakasih banyak ya udah mau hadir di hidup aku. udah mau membuat hari-hari aku lebih berwarna. jujur aja aku merasa beruntung banget bisa jadi pacar kamu hari ini dan seterusnya. makasih juga kamu sudah sangat sabar dan sangat sayang ke aku, nerima semua kekurangan aku, dan selalu mau jadi tempat aku berpulang.",
-  "Oh iya, hari ini hari valentine kan ya? hari dimana para wanita mendapatkan banyak perhatian dan hadiah dari pasangan mereka. aku juga pengen banget ngasih kamu perhatian dan hadiah yang spesial di hari ini. tapi aku masih bingung nih, kira-kira kamu mau gak ya, kalo ngerayain valentine bareng aku? cowok kamu yang paling ganteng ini, hehehe.",
+  "Oh iya, hari ini hari valentine kan ya? hari dimana para wanita mendapatkan banyak kasih sayang dan hadiah dari pasangan mereka. aku juga pengen banget ngasih kamu banyak kasih sayang dan hadiah yang spesial di hari ini. tapi aku masih bingung nih, kira-kira kamu mau gak ya, kalo ngerayain valentine bareng aku? cowok kamu yang paling ganteng ini, hehehe.",
   "Kalo kamu mau tolong pencet mau ya cantik ku 😘",
 ];
+
+const WHATSAPP_NUMBER = "+6285746696663";
+const WHATSAPP_MESSAGE = "Iya sayang aku mau banget!";
 
 function App() {
   const audioRef = useRef(null);
@@ -52,6 +55,8 @@ function App() {
     ? "scene-accepted"
     : isLastLine
     ? "scene-choice"
+    : lineIndex === 0
+    ? "scene-story-short"
     : "scene-story";
 
   const nextLine = () => {
@@ -110,6 +115,10 @@ function App() {
       // Play can fail if browser blocks media or file is missing.
     }
   };
+
+  const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+    WHATSAPP_MESSAGE
+  )}`;
 
   return (
     <main className={`app ${accepted ? "celebrate" : ""}`}>
@@ -194,11 +203,20 @@ function App() {
         ) : (
           <div className="content accepted-copy">
             <p>Yay! Makasih sayangnya aku, udah mau ngerayain valentine bareng aku. 😘</p>
-            <p>Semoga Valentine kita kali ini lebih manis dan berkesan dari tahun-tahun sebelumnya ya 😍
-            Aku janji bakal berusaha jadi pacar yang lebih baik lagi buat kamu untuk setiap harinya.
-            jadi tolong jangan bosan-bosan menerima aku sebagai pacar kamu ya sayang. ❤️
+            <p>
+              Semoga Valentine kita kali ini lebih manis dan berkesan dari tahun-tahun sebelumnya ya 😍
+              Aku janji bakal berusaha jadi pacar yang lebih baik lagi buat kamu untuk setiap harinya.
+              jadi tolong jangan bosan-bosan menerima aku sebagai pacar kamu ya sayang. ❤️
             </p>
             <p>Love banyak-banyak untuk kamu ya sayang ku! 😘💕</p>
+            <a
+              className="btn btn-contact"
+              href={whatsappLink}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Balas pesan ini ya cantik ku! 😘💕
+            </a>
           </div>
         )}
       </section>

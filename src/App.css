@@ -56,11 +56,17 @@ body {
 }
 
 .card.scene-start {
+  min-height: clamp(360px, 54vh, 470px);
   --card-bottom-space: 120px;
 }
 
 .card.scene-story {
   --card-bottom-space: 138px;
+}
+
+.card.scene-story-short {
+  min-height: clamp(370px, 55vh, 490px);
+  --card-bottom-space: 124px;
 }
 
 .card.scene-choice {
@@ -284,11 +290,24 @@ h1 {
   box-shadow: 0 8px 20px rgba(230, 57, 127, 0.35);
 }
 
+.btn-contact {
+  display: inline-block;
+  margin-top: 16px;
+  text-decoration: none;
+  background: linear-gradient(160deg, #ff6f98, #e6397f);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(230, 57, 127, 0.35);
+}
+
 .start-content {
   display: grid;
   justify-items: center;
   gap: 6px;
   margin-top: clamp(16px, 3vh, 34px);
+}
+
+.card.scene-start .start-content {
+  margin-top: clamp(74px, 13vh, 150px);
 }
 
 .audio-note {
@@ -469,11 +488,17 @@ h1 {
   }
 
   .card.scene-start {
+    min-height: clamp(410px, 56vh, 540px);
     --card-bottom-space: 136px;
   }
 
   .card.scene-story {
     --card-bottom-space: 156px;
+  }
+
+  .card.scene-story-short {
+    min-height: clamp(420px, 57vh, 560px);
+    --card-bottom-space: 142px;
   }
 
   .card.scene-choice {
@@ -486,6 +511,10 @@ h1 {
 
   .content {
     margin-top: 44px;
+  }
+
+  .card.scene-start .start-content {
+    margin-top: clamp(92px, 14vh, 170px);
   }
 
   .btn {
@@ -503,11 +532,17 @@ h1 {
   }
 
   .card.scene-start {
+    min-height: clamp(450px, 58vh, 600px);
     --card-bottom-space: 154px;
   }
 
   .card.scene-story {
     --card-bottom-space: 176px;
+  }
+
+  .card.scene-story-short {
+    min-height: clamp(460px, 59vh, 620px);
+    --card-bottom-space: 160px;
   }
 
   .card.scene-choice {
@@ -541,11 +576,17 @@ h1 {
   }
 
   .card.scene-start {
+    min-height: clamp(360px, 58vh, 500px);
     --card-bottom-space: 118px;
   }
 
   .card.scene-story {
     --card-bottom-space: 134px;
+  }
+
+  .card.scene-story-short {
+    min-height: clamp(368px, 59vh, 510px);
+    --card-bottom-space: 122px;
   }
 
   .card.scene-choice {
@@ -567,6 +608,10 @@ h1 {
   .content p {
     font-size: 1.05rem;
     line-height: 1.45;
+  }
+
+  .card.scene-start .start-content {
+    margin-top: clamp(46px, 8vh, 92px);
   }
 
   .actions {
